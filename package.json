@@ -1,0 +1,71 @@
+{
+  "name": "@zcorky/moment",
+  "version": "1.0.0",
+  "description": "immutable date time library written with TypeScript, inspired by dayjs and moment",
+  "main": "lib/index.js",
+  "repository": "https://github.com/zcorky/moment",
+  "author": "Zero <uniquecolesmith@gmail.com>",
+  "license": "MIT",
+  "keyworkds": [
+    "zcorky",
+    "moment",
+    "dayjs",
+    "immutable",
+    "time",
+    "date"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf -rf lib",
+    "test": "NODE_ENV=test nyc mocha test/*.spec.ts --exit --timeout 10000",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.4",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
+    "husky": "^1.2.1",
+    "mocha": "^5.2.0",
+    "moment": "^2.23.0",
+    "nyc": "^13.0.1",
+    "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.9",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.10.0",
+    "tslint-eslint-rules": "^5.3.1",
+    "tslint-jsdoc-rules": "^0.1.2",
+    "typescript": "^3.2.2"
+  },
+  "files": [
+    "lib/"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
+  "nyc": {
+    "check-coverage": true,
+    "include": [
+      "src/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register",
+      "source-map-support/register"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@zcorky/is": "^1.0.6"
+  }
+}
