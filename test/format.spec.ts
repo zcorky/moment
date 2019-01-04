@@ -59,6 +59,7 @@ describe('format', () => {
 
   describe('moment', () => {
     it('Format empty string', () => {
+      console.log(momentjs().format(), moment().format());
       expect(momentjs().format()).to.be.equal(moment().format());
     });
 

@@ -91,5 +91,5 @@ export const getZone = (date: Date) => {
   const minutes = Math.abs(negMinutes);
   const hourOffset = Math.floor(minutes / 60);
   const minuteOffset = minutes % 60;
-  return `${negMinutes < 0 ? '+' : '-'}${padStart(String(hourOffset), 2, '0')}:${padStart(String(minuteOffset), 2, '0')}`;
+  return `${negMinutes <= 0 ? '+' : '-'}${padStart(String(hourOffset), 2, '0')}:${padStart(String(minuteOffset), 2, '0')}`;
 };
