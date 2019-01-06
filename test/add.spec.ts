@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import * as moment from 'moment';
 import { Moment } from '../src';
 
-const momentjs = (d: Date) => new Moment({ date: d });
+const momentjs = (d: string | Date) => new Moment({ date: d });
 
 describe('add', () => {
   const now = new Date();
@@ -28,6 +28,8 @@ describe('add', () => {
   });
 
   it('day: 1', () => {
+    console.log(momentjs(now).add(1, 'day').valueOf());
+    console.log(moment(now).add(1, 'day').valueOf());
     expect(momentjs(now).add(1, 'day').valueOf())
       .to.be.equal(moment(now).add(1, 'day').valueOf());
   });
@@ -175,5 +177,9 @@ describe('add', () => {
   it('week: 8888', () => {
     expect(momentjs(now).add(8888, 'week').valueOf())
       .to.be.equal(moment(now).add(8888, 'week').valueOf());
+  });
+
+  it('special: 20111031 + 1 month should be 20111130', () => {
+    expect(momentjs('20111031').add(1, 'month').valueOf()).to.be.equal(moment('20111031').add(1, 'month').valueOf())
   });
 });

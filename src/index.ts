@@ -55,6 +55,9 @@ export interface IMoment {
   // isAfter(): boolean;
   // isBefore(): boolean;
   // isValid(): boolean;
+
+  // cases
+  lastDayInMonth(): number;
 }
 
 export interface Options {
@@ -162,6 +165,10 @@ export class Moment implements IMoment {
     return this;
   }
 
+  public lastDayInMonth(): number {
+    return this.endOf(Units.month).day();
+  }
+
   public startOf(unit: Unit): this {
     return this.$of(unit, true);
   }
@@ -180,19 +187,28 @@ export class Moment implements IMoment {
       return this.set(u, current + delta);
     };
 
-    const instanceFactorSet = (multiple: number) => {
-      return this.set(Units.day, this.$r.day + delta * multiple);
+    const instanceFactorSetMonth = (current: number) => {
+      // special day: lastDayOfMonth
+      if (this.day() === this.lastDayInMonth()) {
+        const date = this
+          .set(Units.day, 1)
+          .set(Units.month, current + delta);
+        const day = Math.min(this.day(), date.lastDayInMonth());
+        return date.set(Units.day, day);
+      }
+
+      return instanceFactor(Units.month, current);
+    };
+
+    const instanceFactorSetWeek = () => {
+      return this.set(Units.day, this.$r.day + delta * 7);
     }
 
     switch (unit) {
       case Units.year:
         return instanceFactor(unit, this.$r.year);
-      case Units.month:
-        return instanceFactor(unit, this.$r.month);
       case Units.day:
         return instanceFactor(unit, this.$r.day);
-      case Units.week:
-        return instanceFactorSet(7);
       case Units.hour:
         return instanceFactor(unit, this.$r.hour);
       case Units.minute:
@@ -201,6 +217,10 @@ export class Moment implements IMoment {
         return instanceFactor(unit, this.$r.second);
       case Units.milliSecond:
         return instanceFactor(unit, this.$r.milliSecond);
+      case Units.month:
+        return instanceFactorSetMonth(this.$r.month);
+      case Units.week:
+        return instanceFactorSetWeek();
       default:
         return this;
     }
