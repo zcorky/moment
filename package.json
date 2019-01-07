@@ -1,6 +1,6 @@
 {
   "name": "@zcorky/moment",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "immutable date time library written with TypeScript, inspired by dayjs and moment",
   "main": "lib/index.js",
   "repository": "https://github.com/zcorky/moment",
