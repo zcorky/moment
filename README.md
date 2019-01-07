@@ -1,9 +1,12 @@
 # moment
 
 [![NPM version](https://img.shields.io/npm/v/@zcorky/moment.svg?style=flat)](https://www.npmjs.com/package/@zcorky/moment)
-[![Coverage Status](https://img.shields.io/codecov/c/github/zcorky/moment/master.svg?style=flat-square)](https://codecov.io/gh/zcorky/moment)
-[![Dependencies](https://david-dm.org/@zcorky/moment/status.svg)](https://david-dm.org/@zcorky/moment)
+[![NPM quality](http://npm.packagequality.com/badge/@zcorky/moment.png)](http://packagequality.com/#?package=@zcorky/moment)
+[![Coverage Status](https://codecov.io/gh/zcorky/moment/branch/master/graph/badge.svg)](https://codecov.io/gh/zcorky/moment)
+[![Dependencies](https://img.shields.io/david/zcorky/moment.svg?style=flat-square)](https://david-dm.org/zcorky/moment)
 [![Build Status](https://travis-ci.com/zcorky/moment.svg?branch=master)](https://travis-ci.com/zcorky/moment)
+[![Known Vulnerabilities](https://snyk.io/test/npm/@zcorky/moment/badge.svg?style=flat-square)](https://snyk.io/test/npm/@zcorky/moment)
+[![NPM download](https://img.shields.io/npm/dm/@zcorky/moment.svg?style=flat-square)](https://www.npmjs.com/package/@zcorky/moment)
 ![license](https://img.shields.io/github/license/zcorky/moment.svg)
 [![issues](https://img.shields.io/github/issues/zcorky/moment.svg)](https://github.com/zcorky/moment/issues)
 
