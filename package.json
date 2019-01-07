@@ -29,7 +29,7 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
-    "test": "NODE_ENV=test nyc mocha test/*.spec.ts --exit --timeout 10000",
+    "test": "cross-env NODE_ENV=test nyc mocha test/*.spec.ts --exit --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "prepublishOnly": "npm run build"
   },
@@ -39,6 +39,7 @@
     "@types/node": "^10.9.4",
     "chai": "^4.1.2",
     "codecov": "^3.1.0",
+    "cross-env": "^5.2.0",
     "husky": "^1.2.1",
     "mocha": "^5.2.0",
     "moment": "^2.23.0",
