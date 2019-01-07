@@ -57,6 +57,7 @@ export enum SetMethods {
   millisecond = 'setMilliseconds',
 };
 
+/*
 export const SECONDS_A_MINUTE = 60;
 export const SECONDS_A_HOUR = SECONDS_A_MINUTE * 60;
 export const SECONDS_A_DAY = SECONDS_A_HOUR * 24;
@@ -67,5 +68,6 @@ export const MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND;
 export const MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND;
 export const MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND;
 export const MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND;
+*/
 
 export const INVALID_DATE = 'Invalid Date';
