@@ -48,12 +48,14 @@ describe('format', () => {
     });
 
     it('YYYY-MM-DD hh:mm:ss A', () => {
-      const mj = momentjs();
-      expect(mj.format('YYYY-MM-DD hh:mm:ss A'))
-        .to.be.equal(
-          `${mj.year()}-${pad(mj.month() + 1)}-${pad(mj.day())}` +
-          ` ${pad(mj.hour() < 13 ? mj.hour() : mj.hour() - 12)}:${pad(mj.minute())}:${pad(mj.second())} ${mj.hour() < 12 ? 'AM' : 'PM'}`
-        );
+      const now = new Date();
+      const mj = momentjs(now);
+      // expect(mj.format('YYYY-MM-DD hh:mm:ss A'))
+      //   .to.be.equal(
+      //     `${mj.year()}-${pad(mj.month() + 1)}-${pad(mj.day())}` +
+      //     ` ${pad(mj.hour() < 13 ? mj.hour() : mj.hour() - 12)}:${pad(mj.minute())}:${pad(mj.second())} ${mj.hour() < 12 ? 'AM' : 'PM'}`
+      //   );
+      expect(mj.format('YYYY-MM-DD hh:mm:ss A')).to.be.equal(moment(now).format('YYYY-MM-DD hh:mm:ss A'));
     });
   });
 
