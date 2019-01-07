@@ -1,7 +1,7 @@
 # moment
 
 [![NPM version](https://img.shields.io/npm/v/@zcorky/moment.svg?style=flat)](https://www.npmjs.com/package/@zcorky/moment)
-[![Coverage Status](https://img.shields.io/coveralls/zcorky/moment.svg?style=flat)](https://coveralls.io/r/zcorky/moment)
+[![Coverage Status](https://img.shields.io/codecov/c/github/zcorky/moment/master.svg?style=flat-square)](https://codecov.io/gh/zcorky/moment)
 [![Dependencies](https://david-dm.org/@zcorky/moment/status.svg)](https://david-dm.org/@zcorky/moment)
 [![Build Status](https://travis-ci.com/zcorky/moment.svg?branch=master)](https://travis-ci.com/zcorky/moment)
 ![license](https://img.shields.io/github/license/zcorky/moment.svg)

@@ -4,7 +4,19 @@
   "description": "immutable date time library written with TypeScript, inspired by dayjs and moment",
   "main": "lib/index.js",
   "repository": "https://github.com/zcorky/moment",
-  "author": "Zero <uniquecolesmith@gmail.com>",
+  "homepage": "https://github.com/zcorky/moment",
+  "bugs": {
+    "url": "https://github.com/zcorky/moment/issues"
+  },
+  "keywords": [
+    "zcorky",
+    "moment",
+    "dayjs",
+    "time",
+    "immutable",
+    "typescript"
+  ],
+  "author": "Zero <uniquecolesmith@gmail.com> (https://moeover.com)",
   "license": "MIT",
   "keyworkds": [
     "zcorky",
@@ -18,7 +30,7 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
     "test": "NODE_ENV=test nyc mocha test/*.spec.ts --exit --timeout 10000",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
@@ -26,7 +38,7 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.9.4",
     "chai": "^4.1.2",
-    "coveralls": "^3.0.2",
+    "codecov": "^3.1.0",
     "husky": "^1.2.1",
     "mocha": "^5.2.0",
     "moment": "^2.23.0",
