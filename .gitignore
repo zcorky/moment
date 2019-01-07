@@ -65,3 +65,5 @@ typings/
 yarn.lock
 
 lib
+
+coverage.lcov
