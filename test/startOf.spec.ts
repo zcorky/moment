@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { Moment } from '../src';
 import { resolve } from '../src/utils';
 
@@ -13,7 +11,7 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('year').valueOf())
-      .to.be.equal(+new Date(dates[0], 0, 1));
+      .toBe(+new Date(dates[0], 0, 1));
   });
 
   it('month', () => {
@@ -21,7 +19,7 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('month').valueOf())
-      .to.be.equal(+new Date(dates[0], dates[1], 1));
+      .toBe(+new Date(dates[0], dates[1], 1));
   });
 
   it('day', () => {
@@ -29,7 +27,7 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('day').valueOf())
-      .to.be.equal(+new Date(dates[0], dates[1], dates[2]));
+      .toBe(+new Date(dates[0], dates[1], dates[2]));
   });
 
   it('week', () => {
@@ -37,7 +35,7 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('week').valueOf())
-      .to.be.equal(+new Date(dates[0], dates[1], dates[2] - resolve(date).week));
+      .toBe(+new Date(dates[0], dates[1], dates[2] - resolve(date).week));
   });
 
   it('hour', () => {
@@ -45,7 +43,7 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('hour').valueOf())
-      .to.be.equal(+new Date(dates[0], dates[1], dates[2], dates[3]));
+      .toBe(+new Date(dates[0], dates[1], dates[2], dates[3]));
   });
 
   it('minute', () => {
@@ -53,7 +51,7 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('minute').valueOf())
-      .to.be.equal(+new Date(dates[0], dates[1], dates[2], dates[3], dates[4]));
+      .toBe(+new Date(dates[0], dates[1], dates[2], dates[3], dates[4]));
   });
 
   it('second', () => {
@@ -61,6 +59,6 @@ describe('startOf', () => {
     const md = momentjs(date);
     const dates = md.toArray();
     expect(md.startOf('second').valueOf())
-      .to.be.equal(+new Date(dates[0], dates[1], dates[2], dates[3], dates[4], dates[5]));
+      .toBe(+new Date(dates[0], dates[1], dates[2], dates[3], dates[4], dates[5]));
   });
 });

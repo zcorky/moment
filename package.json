@@ -29,23 +29,21 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
-    "test": "cross-env NODE_ENV=test nyc mocha test/*.spec.ts --exit --timeout 10000",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "test": "jest",
+    "coverage": "jest && codecov",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.5",
+    "@types/jest": "^23.3.12",
     "@types/node": "^10.9.4",
-    "chai": "^4.1.2",
     "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "husky": "^1.2.1",
-    "mocha": "^5.2.0",
+    "jest": "^23.6.0",
     "moment": "^2.23.0",
-    "nyc": "^13.0.1",
     "rimraf": "^2.6.2",
-    "source-map-support": "^0.5.9",
+    "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",
     "tslint": "^5.10.0",
     "tslint-eslint-rules": "^5.3.1",
@@ -60,20 +58,37 @@
       "pre-commit": "npm test"
     }
   },
-  "nyc": {
-    "check-coverage": true,
-    "include": [
-      "src/*.ts"
+  "jest": {
+    "roots": [
+      "test"
     ],
-    "extension": [
-      ".ts"
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "test/.*\\.spec\\.(ts|tsx)$",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
     ],
-    "require": [
-      "ts-node/register",
-      "source-map-support/register"
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
     ],
-    "sourceMap": true,
-    "instrument": true
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 90,
+        "lines": 90,
+        "statements": -10
+      }
+    }
   },
   "publishConfig": {
     "access": "public"
