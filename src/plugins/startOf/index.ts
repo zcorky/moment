@@ -1,11 +1,6 @@
 import { Moment } from '../../index';
 
 declare module '../../index' {
-  export interface Range {
-    start: Moment;
-    end: Moment;
-  }
-
   export interface Moment {
     startOfDay(): Moment;
     startOfWeek(): Moment;
