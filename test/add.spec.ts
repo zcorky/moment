@@ -27,8 +27,6 @@ describe('add', () => {
   });
 
   it('day: 1', () => {
-    console.log(momentjs(now).add(1, 'day').valueOf());
-    console.log(moment(now).add(1, 'day').valueOf());
     expect(momentjs(now).add(1, 'day').valueOf())
       .toBe(moment(now).add(1, 'day').valueOf());
   });
