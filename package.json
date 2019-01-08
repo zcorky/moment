@@ -81,9 +81,6 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
     ],
-    "coverageReporters": [
-      "clover"
-    ],
     "coverageThreshold": {
       "global": {
         "branches": 80,
