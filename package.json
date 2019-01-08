@@ -13,19 +13,12 @@
     "moment",
     "dayjs",
     "time",
+    "date",
     "immutable",
     "typescript"
   ],
   "author": "Zero <uniquecolesmith@gmail.com> (https://moeover.com)",
   "license": "MIT",
-  "keyworkds": [
-    "zcorky",
-    "moment",
-    "dayjs",
-    "immutable",
-    "time",
-    "date"
-  ],
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
