@@ -67,3 +67,5 @@ yarn.lock
 lib
 
 coverage.lcov
+
+tmp

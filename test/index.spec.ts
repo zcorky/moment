@@ -10,7 +10,7 @@ describe('@zcorky/moment', () => {
   });
 
   it('moment', () => {
-    const now = moment();
+    const now = Date.now();
     const i = moment(now).startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
     const m = wmoment(now).startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
     expect(i).toBe(m);

@@ -15,15 +15,15 @@ export type Locale = typeof DEFAULT_LOCALES;
 
 export type ResolveDate = ReturnType<typeof resolve>;
 
-export interface IMoment {
+export interface Moment {
   // chain
-  startOf(unit: Unit): this;
-  endOf(unit: Unit): this;
-  set(unit: Unit, value: number): this;
-  add(delta: number, unit: Unit): this;
-  minus(delta: number, unit: Unit): this;
-  subtract(delta: number, unit: Unit): this;
-  locale(): this;
+  startOf(unit: Unit): Moment;
+  endOf(unit: Unit): Moment;
+  set(unit: Unit, value: number): Moment;
+  add(delta: number, unit: Unit): Moment;
+  minus(delta: number, unit: Unit): Moment;
+  subtract(delta: number, unit: Unit): Moment;
+  locale(): Moment;
 
   // value
 
@@ -58,6 +58,9 @@ export interface IMoment {
 
   // cases
   lastDayInMonth(): number;
+
+  // plugin
+  // extend<T>(plugin: Plugin<T>, options: T): void
 }
 
 export interface Options {
@@ -73,9 +76,9 @@ export interface Options {
   locale?: Locale;
 }
 
-export type Plugin<T> = (M: typeof Moment, options: T) => void;
+export type Plugin = (M: Moment) => void;
 
-export const moment = (date?: Date | Moment | string | number, options?: Options) => {
+export const moment = (date?: Date | Moment | string | number, options?: Options): Moment => {
   if (date instanceof Moment) {
     return date.clone();
   }
@@ -88,7 +91,7 @@ export const moment = (date?: Date | Moment | string | number, options?: Options
 const wrapper = (date: Date | Moment, instance: Moment) =>
   moment(date, { locale: (instance as any).$locale }); // @TODO private variable
 
-export class Moment implements IMoment {
+export class Moment {
   /* common date */
   private $d: Date;
   /* date resolver */
@@ -100,9 +103,9 @@ export class Moment implements IMoment {
   //   fn(Moment, options);
   // }
 
-  // public static extend<T>(plugin: Plugin<T>, options: T) {
-  //   plugin(Moment, options);
-  // }
+  public static extend(plugin: Plugin) {
+    plugin(Moment as any as Moment); // @TODO
+  }
 
   constructor(options?: Options) {
     const _options = options || {} as Options;
@@ -117,7 +120,7 @@ export class Moment implements IMoment {
     return this;
   }
 
-  private $of(unit: Unit, isStartOf: boolean) {
+  protected $of(unit: Unit, isStartOf: boolean): Moment {
     const instanceFactory = (day: number, month: number) => {
       const ins = wrapper(new Date(this.$r.year, month, day), this);
       return isStartOf ? ins : ins.endOf(Units.day);
@@ -154,7 +157,7 @@ export class Moment implements IMoment {
     }
   }
 
-  private $set(unit: Unit, value: number): this {
+  protected $set(unit: Unit, value: number): this {
     const name = SetMethods[unit];
     const method = this.$d[name];
     method.call(this.$d, value);
@@ -169,20 +172,21 @@ export class Moment implements IMoment {
     return this.endOf(Units.month).day();
   }
 
-  public startOf(unit: Unit): this {
+  public startOf(unit: Unit) {
     return this.$of(unit, true);
   }
 
-  public endOf(unit: Unit): this {
+  public endOf(unit: Unit) {
     return this.$of(unit, false);
   }
 
-  public set(unit: Unit, value: number): this {
+  public set(unit: Unit, value: number) {
     // clone => immutable
-    return this.clone().$set(unit, value);
+    // @TODO
+    return (this.clone() as Moment).$set(unit, value);
   }
 
-  public add(delta: number, unit: Unit): this {
+  public add(delta: number, unit: Unit) {
     const instanceFactor = (u: Unit, current: number) => {
       return this.set(u, current + delta);
     };
@@ -226,11 +230,11 @@ export class Moment implements IMoment {
     }
   }
 
-  public minus(delta: number, unit: Unit): this {
+  public minus(delta: number, unit: Unit) {
     return this.add(delta * -1, unit);
   }
 
-  public subtract(delta: number, unit: Unit): this {
+  public subtract(delta: number, unit: Unit) {
     return this.minus(delta, unit);
   }
 
