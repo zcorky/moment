@@ -30,7 +30,7 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
     "test": "jest",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "coverage": "jest && codecov",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
