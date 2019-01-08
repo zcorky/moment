@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import * as moment from 'moment';
 import { Moment } from '../src';
 
@@ -12,42 +10,42 @@ describe('set', () => {
 
   // it('toString', () => {
   //   expect(mj.toString())
-  //     .to.be.equal(mo.toString());
+  //     .toBe(mo.toString());
   // });
 
   it('toString', () => {
     expect(mj.toString())
-      .to.be.equal(today.toUTCString());
+      .toBe(today.toUTCString());
   });
 
   it('toISOString', () => {
     expect(mj.toISOString())
-      .to.be.equal(mo.toISOString());
+      .toBe(mo.toISOString());
   });
 
   it('toJSON', () => {
     expect(mj.toJSON())
-      .to.be.equal(mo.toJSON());
+      .toBe(mo.toJSON());
   });
 
   it('toArray', () => {
     expect(mj.toArray())
-      .to.be.deep.equal(mo.toArray());
+      .toEqual(mo.toArray());
   });
 
   // it('toObject', () => {
   //   expect(mj.toObject())
-  //     .to.be.deep.equal(mo.toObject());
+  //     .toEqual(mo.toObject());
   // });
 
   it('toObject', () => {
     expect(mj.toObject())
-      .to.be.deep.equal(['year', 'month', 'day', 'hour', 'minute', 'second', 'milliSecond', 'week']
+      .toEqual(['year', 'month', 'day', 'hour', 'minute', 'second', 'milliSecond', 'week']
       .reduce((last, k) => (last[k] = mj[k].call(mj), last), {}));
   });
 
   it('toDate', () => {
     expect(mj.toDate().toString())
-      .to.be.equal(mo.toDate().toString());
+      .toBe(mo.toDate().toString());
   });
 });
