@@ -36,7 +36,8 @@ describe('endOf*', () => {
   });
 
   it('second', () => {
-    expect(moment().endOfSecond().valueOf()).toBe(moment().endOf('second').valueOf());
-    expect(moment().endOfSecond().valueOf()).toBe(momentjs().endOf('second').valueOf());
+    const now = new Date();
+    expect(moment(now).endOfSecond().valueOf()).toBe(moment(now).endOf('second').valueOf());
+    expect(moment(now).endOfSecond().valueOf()).toBe(momentjs(now).endOf('second').valueOf());
   });
 });
