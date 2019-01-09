@@ -1,5 +1,7 @@
 import { Moment } from '../../index';
-import { MILLISECONDS_A_DAY } from '../../constants';
+import dayOfYear from '../dayOfYear';
+
+Moment.extend(dayOfYear());
 
 declare module '../../index' {
   export interface Moment {
@@ -13,8 +15,7 @@ export default () => {
     const proto = (Moment as any).prototype as Moment;
 
     proto.weekOfYear = function () {
-      const dayOfYear = Math.floor((this.valueOf() - this.startOf('year').valueOf()) / MILLISECONDS_A_DAY) + 1;
-      return Math.ceil(dayOfYear / 7);
+      return Math.ceil(this.dayOfYear() / 7);
     }
   };
 };
