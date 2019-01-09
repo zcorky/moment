@@ -1,4 +1,5 @@
 import { Moment } from '../../index';
+import { Units } from '../../constants';
 
 declare module '../../index' {
   export interface Moment {
@@ -18,31 +19,31 @@ export default () => {
     const proto = (Moment as any).prototype as Moment;
 
     proto.startOfDay = function () {
-      return this.startOf('day');
+      return this.startOf(Units.day);
     };
 
     proto.startOfWeek = function () {
-      return this.startOf('week');
+      return this.startOf(Units.week);
     };
 
     proto.startOfMonth = function () {
-      return this.startOf('month');
+      return this.startOf(Units.month);
     };
 
     proto.startOfYear = function () {
-      return this.startOf('year');
+      return this.startOf(Units.year);
     };
 
     proto.startOfHour = function () {
-      return this.startOf('hour');
+      return this.startOf(Units.hour);
     };
 
     proto.startOfMinute = function () {
-      return this.startOf('minute');
+      return this.startOf(Units.minute);
     };
 
     proto.startOfSecond = function () {
-      return this.startOf('second');
+      return this.startOf(Units.second);
     };
   }
 }
