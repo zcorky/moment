@@ -4,7 +4,18 @@ import {
   undef as isUndef,
 } from '@zcorky/is';
 
-import { REGEXP_PARSE, DEFAULT_LOCALES } from './constants';
+import {
+  REGEXP_PARSE,
+  DEFAULT_LOCALES,
+  MILLISECONDS_A_WEEK,
+  MILLISECONDS_A_DAY,
+  MILLISECONDS_A_HOUR,
+  MILLISECONDS_A_MINUTE,
+  MILLISECONDS_A_SECOND,
+  Units,
+} from './constants';
+
+import { Unit, Moment } from './index';
 
 export const parse = (date?: number | string | Date): Date => {
   // undefine or no data
@@ -93,3 +104,30 @@ export const getZone = (date: Date) => {
   const minuteOffset = minutes % 60;
   return `${negMinutes <= 0 ? '+' : '-'}${padStart(String(hourOffset), 2, '0')}:${padStart(String(minuteOffset), 2, '0')}`;
 };
+
+export const getDiff = (a: Moment, b: Moment, unit: Unit) => {
+  const timestampsDiff = a.valueOf() - b.valueOf();
+  switch (unit) {
+    case Units.year:
+      return ~~(diffMonth(a, b) / 12);
+    case Units.month:
+      return diffMonth(a, b);
+    case Units.week:
+      return timestampsDiff / MILLISECONDS_A_WEEK;
+    case Units.day:
+      return timestampsDiff / MILLISECONDS_A_DAY;
+    case Units.hour:
+      return timestampsDiff / MILLISECONDS_A_HOUR;
+    case Units.minute:
+      return timestampsDiff / MILLISECONDS_A_MINUTE;
+    case Units.second:
+      return timestampsDiff / MILLISECONDS_A_SECOND;
+  }
+}
+
+export const diffMonth = (a: Moment, b: Moment) => {
+  const months = (b.year() - a.year()) * 12 + (b.month() - a.month());
+  const mayB = a.add(months, Units.month);
+
+  return b.valueOf() - mayB.valueOf() < 0 ? -(months - 1) : -months;
+}

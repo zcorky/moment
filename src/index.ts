@@ -2,6 +2,7 @@ import {
   parse,
   resolve,
   getFormats,
+  getDiff,
 } from './utils';
 import {
   DEFAULT_FORMAT_PATTERN,
@@ -251,6 +252,10 @@ export class Moment {
 
   public clone() {
     return wrapper(this.toDate(), this);
+  }
+
+  public diff(input: Date | Moment | number | string, unit: Unit) {
+    return getDiff(this, moment(input), unit);
   }
 
   public valueOf() {
