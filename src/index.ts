@@ -16,6 +16,8 @@ export type Locale = typeof DEFAULT_LOCALES;
 
 export type ResolveDate = ReturnType<typeof resolve>;
 
+export type IDate = Date | Moment | string | number;
+
 export interface Moment {
   // chain
   startOf(unit: Unit): Moment;
@@ -53,9 +55,9 @@ export interface Moment {
 
   // is
   isValid(): boolean;
-  // isAfter(): boolean;
-  // isBefore(): boolean;
-  // isValid(): boolean;
+  isSame(): boolean;
+  isAfter(): boolean;
+  isBefore(): boolean;
 
   // cases
   lastDayInMonth(): number;
@@ -72,14 +74,14 @@ export interface Options {
    *  support 20190101 00:00:00
    *  support 2019-01-03T06:26:57.873Z
    */
-  date?: number | string | Date
+  date?: Date | Moment | string | number;
 
   locale?: Locale;
 }
 
 export type Plugin = (M: Moment) => void;
 
-export const moment = (date?: Date | Moment | string | number, options?: Options): Moment => {
+export const moment = (date?: IDate, options?: Options): Moment => {
   if (date instanceof Moment) {
     return date.clone();
   }
@@ -89,7 +91,7 @@ export const moment = (date?: Date | Moment | string | number, options?: Options
   return new Moment(_options);
 }
 
-const wrapper = (date: Date | Moment, instance: Moment) =>
+const wrapper = (date: IDate, instance: Moment) =>
   moment(date, { locale: (instance as any).$locale }); // @TODO private variable
 
 export class Moment {
@@ -110,7 +112,7 @@ export class Moment {
 
   constructor(options?: Options) {
     const _options = options || {} as Options;
-    this.$d = parse(_options.date);
+    this.$d = _options.date instanceof Moment ? _options.date.$d : parse(_options.date);
     this.$locale = _options.locale || DEFAULT_LOCALES;
 
     this.init();
