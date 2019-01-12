@@ -55,9 +55,9 @@ export interface Moment {
 
   // is
   isValid(): boolean;
-  isSame(): boolean;
-  isAfter(): boolean;
-  isBefore(): boolean;
+  isSame(date: IDate, unit: Unit): boolean;
+  isAfter(date: IDate, unit: Unit): boolean;
+  isBefore(date: IDate, unit: Unit): boolean;
 
   // cases
   lastDayInMonth(): number;
@@ -123,7 +123,7 @@ export class Moment {
     return this;
   }
 
-  protected $of(unit: Unit, isStartOf: boolean): Moment {
+  protected $of(unit?: Unit, isStartOf?: boolean): Moment {
     const instanceFactory = (day: number, month: number) => {
       const ins = wrapper(new Date(this.$r.year, month, day), this);
       return isStartOf ? ins : ins.endOf(Units.day);
@@ -175,11 +175,11 @@ export class Moment {
     return this.endOf(Units.month).day();
   }
 
-  public startOf(unit: Unit) {
+  public startOf(unit?: Unit) {
     return this.$of(unit, true);
   }
 
-  public endOf(unit: Unit) {
+  public endOf(unit?: Unit) {
     return this.$of(unit, false);
   }
 
@@ -334,6 +334,19 @@ export class Moment {
 
   public isValid() {
     return !(this.$d.toString() === INVALID_DATE);
+  }
+
+  public isSame(date: IDate, unit?: Unit) {
+    const m = moment(date);
+    return this.startOf(unit) <= m && m <= this.endOf(unit);
+  }
+
+  public isBefore(date: IDate, unit?: Unit) {
+    return this.endOf(unit) < moment(date);
+  }
+
+  public isAfter(date: IDate, unit?: Unit) {
+    return moment(date) < this.startOf(unit);
   }
 }
 
