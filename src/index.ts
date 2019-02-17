@@ -26,9 +26,10 @@ export interface Moment {
   add(delta: number, unit: Unit): Moment;
   minus(delta: number, unit: Unit): Moment;
   subtract(delta: number, unit: Unit): Moment;
-  locale(): Moment;
 
   // value
+  locale(): string;
+  utcOffset(): number;
 
   // of
   format(pattern: string): string;
@@ -297,7 +298,11 @@ export class Moment {
   }
 
   public locale() {
-    return this;
+    return 'en'; // @TODO
+  }
+
+  public utcOffset() {
+    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15;
   }
 
   public year() {
