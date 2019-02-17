@@ -22,8 +22,8 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
-    "test": "jest",
-    "coverage": "jest && codecov",
+    "test": "jest -w 1",
+    "coverage": "jest -w 1 && codecov",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
