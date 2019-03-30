@@ -25,7 +25,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs();
       return {
@@ -33,7 +33,7 @@ describe('semver', () => {
         end: date.endOf('week').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -45,7 +45,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs().subtract(1, 'week');
       return {
@@ -53,7 +53,7 @@ describe('semver', () => {
         end: date.endOf('week').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -65,7 +65,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs().add(1, 'week');
       return {
@@ -73,7 +73,7 @@ describe('semver', () => {
         end: date.endOf('week').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -85,7 +85,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs();
       return {
@@ -93,7 +93,7 @@ describe('semver', () => {
         end: date.endOf('month').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -105,7 +105,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs().subtract(1, 'month');
       return {
@@ -113,7 +113,47 @@ describe('semver', () => {
         end: date.endOf('month').format('YYYY-MM-DD'),
       };
     })();
-  
+
+    expect(a).toEqual(b);
+  });
+
+  it('lastMonth - 20190330', () => {
+    const a = (() => {
+      const range = moment('20190330').lastMonth();
+      return {
+        start: range.start.format('YYYY-MM-DD'),
+        end: range.end.format('YYYY-MM-DD'),
+      };
+    })();
+
+    const b = (() => {
+      const date = momentjs('20190330').subtract(1, 'month');
+      return {
+        start: date.startOf('month').format('YYYY-MM-DD'),
+        end: date.endOf('month').format('YYYY-MM-DD'),
+      };
+    })();
+
+    expect(a).toEqual(b);
+  });
+
+  it('lastMonth - 20190331', () => {
+    const a = (() => {
+      const range = moment('20190331').lastMonth();
+      return {
+        start: range.start.format('YYYY-MM-DD'),
+        end: range.end.format('YYYY-MM-DD'),
+      };
+    })();
+
+    const b = (() => {
+      const date = momentjs('20190331').subtract(1, 'month');
+      return {
+        start: date.startOf('month').format('YYYY-MM-DD'),
+        end: date.endOf('month').format('YYYY-MM-DD'),
+      };
+    })();
+
     expect(a).toEqual(b);
   });
 
@@ -125,7 +165,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs().add(1, 'month');
       return {
@@ -133,7 +173,7 @@ describe('semver', () => {
         end: date.endOf('month').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -145,7 +185,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs();
       return {
@@ -153,7 +193,7 @@ describe('semver', () => {
         end: date.endOf('year').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -165,7 +205,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs().subtract(1, 'year');
       return {
@@ -173,7 +213,7 @@ describe('semver', () => {
         end: date.endOf('year').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 
@@ -185,7 +225,7 @@ describe('semver', () => {
         end: range.end.format('YYYY-MM-DD'),
       };
     })();
-  
+
     const b = (() => {
       const date = momentjs().add(1, 'year');
       return {
@@ -193,8 +233,7 @@ describe('semver', () => {
         end: date.endOf('year').format('YYYY-MM-DD'),
       };
     })();
-  
+
     expect(a).toEqual(b);
   });
 });
-
