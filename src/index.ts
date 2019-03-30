@@ -196,11 +196,17 @@ export class Moment {
     };
 
     const instanceFactorSetMonth = (current: number) => {
-      // special day: lastDayOfMonth
+      // special day:
+      //  1. lastDayOfMonth
+      //  2. todayDateOfMonth > lastDayOfLastMonth
+      const date = this
+        .set(Units.day, 1)
+        .set(Units.month, current + delta);
+
       if (this.day() === this.lastDayInMonth()) {
-        const date = this
-          .set(Units.day, 1)
-          .set(Units.month, current + delta);
+        const day = Math.min(this.day(), date.lastDayInMonth());
+        return date.set(Units.day, day);
+      } else if (this.day() > date.day()) {
         const day = Math.min(this.day(), date.lastDayInMonth());
         return date.set(Units.day, day);
       }
