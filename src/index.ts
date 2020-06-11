@@ -80,7 +80,9 @@ export interface Options {
   locale?: Locale;
 }
 
-export type Plugin = (M: Moment) => void;
+export interface Plugin {
+  install(M: Moment): void;
+}
 
 export const moment = (date?: IDate, options?: Options): Moment => {
   if (date instanceof Moment) {
@@ -107,8 +109,13 @@ export class Moment {
   //   fn(Moment, options);
   // }
 
-  public static extend(plugin: Plugin) {
-    plugin(Moment as any as Moment); // @TODO
+  // @DEPRICATED
+  // public static extend(plugin: Plugin) {
+  //   plugin(Moment as any as Moment); // @TODO
+  // }
+
+  public static use(plugin: Plugin) {
+    plugin.install(Moment as any);
   }
 
   constructor(options?: Options) {

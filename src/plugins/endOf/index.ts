@@ -13,9 +13,8 @@ declare module '../../index' {
   }
 }
 
-export default () => {
-  /* tslint:disable-next-line */
-  return (Moment: Moment) => {
+export default () => ({
+  install(Moment: Moment) {
     const proto = (Moment as any).prototype as Moment;
 
     proto.endOfDay = function () {
@@ -45,5 +44,5 @@ export default () => {
     proto.endOfSecond = function () {
       return this.endOf(Units.second);
     };
-  }
-}
+  },
+})

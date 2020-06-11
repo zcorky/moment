@@ -2,7 +2,7 @@ import * as momentjs from 'moment';
 import moment, { Moment } from '../../src';
 import semver from '../../src/plugins/semver';
 
-Moment.extend(semver());
+Moment.use(semver());
 
 describe('semver', () => {
   it('today', () => {

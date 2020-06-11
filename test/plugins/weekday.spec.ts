@@ -2,7 +2,7 @@ import * as momentjs from 'moment';
 import moment, { Moment } from '../../src';
 import weekday from '../../src/plugins/weekday';
 
-Moment.extend(weekday());
+Moment.use(weekday());
 
 describe('weekday', () => {
   it('monday', () => {

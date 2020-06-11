@@ -2,7 +2,7 @@ import * as momentjs from 'moment';
 import moment, { Moment } from '../../src';
 import isLeapYear from '../../src/plugins/isLeapYear';
 
-Moment.extend(isLeapYear());
+Moment.use(isLeapYear());
 
 describe('isLeapYear', () => {
   it('works', () => {

@@ -22,8 +22,8 @@ declare module '../../index' {
   }
 }
 
-export default () => {
-  return (Moment: Moment) => {
+export default () => ({
+  install(Moment: Moment) {
     const proto = (Moment as any).prototype as Moment;
 
     proto.today = function () {
@@ -112,5 +112,5 @@ export default () => {
         end: date.endOf(Units.year),
       };
     }
-  }
-}
+  },
+});

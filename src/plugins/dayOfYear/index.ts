@@ -7,13 +7,12 @@ declare module '../../index' {
   }
 }
 
-export default () => {
-  /* tslint:disable-next-line */
-  return (Moment: Moment) => {
+export default () => ({
+  install(Moment: Moment) {
     const proto = (Moment as any).prototype as Moment;
 
     proto.dayOfYear = function () {
       return Math.floor((this.valueOf() - this.startOf('year').valueOf()) / MILLISECONDS_A_DAY) + 1;
     }
-  };
-};
+  },
+});

@@ -3,7 +3,7 @@ import moment, { Moment } from '../../src';
 import dayOfYear from '../../src/plugins/dayOfYear';
 import { padStart } from '../../src/utils';
 
-Moment.extend(dayOfYear());
+Moment.use(dayOfYear());
 
 describe('dayOfYear', () => {
   it('works', () => {

@@ -6,7 +6,7 @@ import weekOfYear from '../../src/plugins/weekOfYear';
 
 dayjs.extend(week)
 
-Moment.extend(weekOfYear());
+Moment.use(weekOfYear());
 
 describe('weekOfYear', () => {
   it('works', () => {

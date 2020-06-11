@@ -1,7 +1,7 @@
 import { Moment } from '../../index';
 import dayOfYear from '../dayOfYear';
 
-Moment.extend(dayOfYear());
+Moment.use(dayOfYear());
 
 declare module '../../index' {
   export interface Moment {
@@ -9,13 +9,12 @@ declare module '../../index' {
   }
 }
 
-export default () => {
-  /* tslint:disable-next-line */
-  return (Moment: Moment) => {
+export default () => ({
+  install(Moment: Moment) {
     const proto = (Moment as any).prototype as Moment;
 
     proto.weekOfYear = function () {
       return Math.ceil(this.dayOfYear() / 7);
     }
-  };
-};
+  },
+});

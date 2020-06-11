@@ -2,7 +2,7 @@ import * as momentjs from 'moment';
 import moment, { Moment } from '../../src';
 import endOf from '../../src/plugins/endOf';
 
-Moment.extend(endOf());
+Moment.use(endOf());
 
 describe('endOf*', () => {
   it('day', () => {
