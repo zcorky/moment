@@ -75,4 +75,30 @@ describe('set', () => {
     expect(moment('2018-08-08').diff('2019-01-09', 'second'))
       .toBe(momentjs('2018-08-08').diff('2019-01-09', 'second'));
   });
+
+  it('no unit', () => {
+    expect(moment('2020-11-12 12:55:00').diff(moment('2020-11-12 12:40:00'))).toEqual({
+      days: 0,
+      hours: 0,
+      minutes: 15,
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    expect(moment('2020-11-12 12:55:15').diff(moment('2020-11-12 12:40:00'))).toEqual({
+      days: 0,
+      hours: 0,
+      minutes: 15,
+      seconds: 15,
+      milliseconds: 0,
+    });
+
+    expect(moment('2020-11-12 13:55:15').diff(moment('2020-11-12 12:40:00'))).toEqual({
+      days: 0,
+      hours: 1,
+      minutes: 15,
+      seconds: 15,
+      milliseconds: 0,
+    });
+  });
 });

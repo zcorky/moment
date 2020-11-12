@@ -105,7 +105,7 @@ export const getZone = (date: Date) => {
   return `${negMinutes <= 0 ? '+' : '-'}${padStart(String(hourOffset), 2, '0')}:${padStart(String(minuteOffset), 2, '0')}`;
 };
 
-export const getDiff = (a: Moment, b: Moment, unit: Unit) => {
+export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
   const timestampsDiff = a.valueOf() - b.valueOf();
   switch (unit) {
     case Units.year:
@@ -122,6 +122,31 @@ export const getDiff = (a: Moment, b: Moment, unit: Unit) => {
       return timestampsDiff / MILLISECONDS_A_MINUTE;
     case Units.second:
       return timestampsDiff / MILLISECONDS_A_SECOND;
+    default:
+      let restMilliseconds = timestampsDiff;
+      const days = ~~(restMilliseconds / MILLISECONDS_A_DAY);
+      
+      restMilliseconds -= days * MILLISECONDS_A_DAY;
+      const hours = ~~(restMilliseconds / MILLISECONDS_A_HOUR);
+
+      restMilliseconds -= hours * MILLISECONDS_A_HOUR;
+      const minutes = ~~(restMilliseconds / MILLISECONDS_A_MINUTE);
+
+      restMilliseconds -= minutes * MILLISECONDS_A_MINUTE;
+      const seconds = ~~(restMilliseconds / MILLISECONDS_A_SECOND);
+
+      restMilliseconds -= seconds * MILLISECONDS_A_SECOND;
+      const milliseconds = restMilliseconds;
+      
+      return {
+        // year
+        // month
+        days,
+        hours,
+        minutes,
+        seconds,
+        milliseconds,
+      };
   }
 }
 

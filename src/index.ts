@@ -270,7 +270,7 @@ export class Moment {
     return wrapper(this.toDate(), this);
   }
 
-  public diff(input: Date | Moment | number | string, unit: Unit) {
+  public diff(input: Date | Moment | number | string, unit?: Unit) {
     return getDiff(this, moment(input), unit);
   }
 
