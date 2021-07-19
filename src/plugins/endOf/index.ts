@@ -45,4 +45,4 @@ export default () => ({
       return this.endOf(Units.second);
     };
   },
-})
+});

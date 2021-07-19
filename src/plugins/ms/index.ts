@@ -19,7 +19,7 @@ declare module '../../index' {
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365;
 
 /**
- * 
+ *
  * @param value miliseconds value
  */
 export function ms(value: number) {
@@ -49,6 +49,6 @@ export default () => ({
       }
 
       return ms(value);
-    }
+    };
   },
 });

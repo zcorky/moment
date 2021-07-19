@@ -1,16 +1,22 @@
-import {
-  parse,
-  resolve,
-  getFormats,
-  getDiff,
-} from './utils';
+import { parse, resolve, getFormats, getDiff } from './utils';
 import {
   DEFAULT_FORMAT_PATTERN,
   REGEXP_FORMAT,
-  Units, SetMethods, DEFAULT_LOCALES, INVALID_DATE,
+  Units,
+  SetMethods,
+  DEFAULT_LOCALES,
+  INVALID_DATE,
 } from './constants';
 
-export type Unit = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond' | 'week';
+export type Unit =
+  | 'year'
+  | 'month'
+  | 'day'
+  | 'hour'
+  | 'minute'
+  | 'second'
+  | 'millisecond'
+  | 'week';
 
 export type Locale = typeof DEFAULT_LOCALES;
 
@@ -92,7 +98,7 @@ export const moment = (date?: IDate, options?: Options): Moment => {
   const _options = options || {};
   _options.date = date;
   return new Moment(_options);
-}
+};
 
 const wrapper = (date: IDate, instance: Moment) =>
   moment(date, { locale: (instance as any).$locale }); // @TODO private variable
@@ -119,8 +125,11 @@ export class Moment {
   }
 
   constructor(options?: Options) {
-    const _options = options || {} as Options;
-    this.$d = _options.date instanceof Moment ? _options.date.$d : parse(_options.date);
+    const _options = options || ({} as Options);
+    this.$d =
+      _options.date instanceof Moment
+        ? _options.date.$d
+        : parse(_options.date);
     this.$locale = _options.locale || DEFAULT_LOCALES;
 
     this.init();
@@ -135,22 +144,27 @@ export class Moment {
     const instanceFactory = (day: number, month: number) => {
       const ins = wrapper(new Date(this.$r.year, month, day), this);
       return isStartOf ? ins : ins.endOf(Units.day);
-    }
+    };
 
     const instanceFactorySet = (method: string, slices: number) => {
       const argsStart = [0, 0, 0, 0];
       const argsEnd = [23, 59, 59, 999];
-      return wrapper(this.toDate()[method].apply(
-        this.toDate(),
-        (isStartOf ? argsStart : argsEnd).slice(slices),
-      ), this)
+      return wrapper(
+        this.toDate()[method].apply(
+          this.toDate(),
+          (isStartOf ? argsStart : argsEnd).slice(slices),
+        ),
+        this,
+      );
     };
 
     switch (unit) {
       case Units.year:
         return isStartOf ? instanceFactory(1, 0) : instanceFactory(31, 11);
       case Units.month:
-        return isStartOf ? instanceFactory(1, this.$r.month) : instanceFactory(0, this.$r.month + 1);
+        return isStartOf
+          ? instanceFactory(1, this.$r.month)
+          : instanceFactory(0, this.$r.month + 1);
       case Units.week:
         return isStartOf
           ? instanceFactory(this.$r.day - this.$r.week, this.$r.month)
@@ -206,9 +220,7 @@ export class Moment {
       // special day:
       //  1. lastDayOfMonth
       //  2. todayDateOfMonth > lastDayOfLastMonth
-      const date = this
-        .set(Units.day, 1)
-        .set(Units.month, current + delta);
+      const date = this.set(Units.day, 1).set(Units.month, current + delta);
 
       if (this.day() === this.lastDayInMonth()) {
         const day = Math.min(this.day(), date.lastDayInMonth());
@@ -223,7 +235,7 @@ export class Moment {
 
     const instanceFactorSetWeek = () => {
       return this.set(Units.day, this.$r.day + delta * 7);
-    }
+    };
 
     switch (unit) {
       case Units.year:
@@ -259,7 +271,7 @@ export class Moment {
     if (!this.isValid()) return INVALID_DATE;
 
     const formats = getFormats(this.$d, this.$r, this.$locale);
-    return pattern.replace(REGEXP_FORMAT, match => {
+    return pattern.replace(REGEXP_FORMAT, (match) => {
       if (match.indexOf('[') !== -1) return match.replace(/\[|\]/g, '');
 
       return formats[match];

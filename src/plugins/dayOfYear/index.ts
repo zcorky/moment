@@ -12,7 +12,12 @@ export default () => ({
     const proto = (Moment as any).prototype as Moment;
 
     proto.dayOfYear = function () {
-      return Math.floor((this.valueOf() - this.startOf('year').valueOf()) / MILLISECONDS_A_DAY) + 1;
-    }
+      return (
+        Math.floor(
+          (this.valueOf() - this.startOf('year').valueOf()) /
+            MILLISECONDS_A_DAY,
+        ) + 1
+      );
+    };
   },
 });

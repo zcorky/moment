@@ -23,6 +23,7 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf -rf lib",
     "test": "jest -w 1",
+    "fmt": "prettier --write src/**/{*.ts,*.tsx}",
     "eslint": "eslint src/**/*.{ts,tsx} --fix",
     "coverage": "jest -w 1 && codecov",
     "prepublishOnly": "npm run build"
@@ -42,6 +43,7 @@
     "husky": "^1.2.1",
     "jest": "^23.6.0",
     "moment": "^2.23.0",
+    "prettier": "^2.3.2",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",

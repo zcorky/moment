@@ -1,8 +1,4 @@
-
-import {
-  number as isNumber,
-  undef as isUndef,
-} from '@zcorky/is';
+import { number as isNumber, undef as isUndef } from '@zcorky/is';
 
 import {
   REGEXP_PARSE,
@@ -26,19 +22,25 @@ export const parse = (date?: number | string | Date): Date => {
   if (date instanceof Date) return date;
 
   // match regexp
-  if ((/.*[^Z]$/i.test(date)) // @TODO only support ISO Clock
-    && REGEXP_PARSE.test(date)
+  if (
+    /.*[^Z]$/i.test(date) && // @TODO only support ISO Clock
+    REGEXP_PARSE.test(date)
   ) {
     const matches = date.match(REGEXP_PARSE)!;
     return new Date(
-      +matches[1], +matches[2] - 1, +matches[3] || 1,
-      +matches[5] || 0, +matches[6] || 0, +matches[7] || 0, +matches[8] || 0,
+      +matches[1],
+      +matches[2] - 1,
+      +matches[3] || 1,
+      +matches[5] || 0,
+      +matches[6] || 0,
+      +matches[7] || 0,
+      +matches[8] || 0,
     );
   }
 
   // uncatch string
   return new Date(date);
-}
+};
 
 export const resolve = (date: Date) => ({
   year: date.getFullYear(),
@@ -51,7 +53,11 @@ export const resolve = (date: Date) => ({
   milliSecond: date.getMilliseconds(),
 });
 
-export const getFormats = (date: Date, rd: ReturnType<typeof resolve>, locale: typeof DEFAULT_LOCALES = DEFAULT_LOCALES) => {
+export const getFormats = (
+  date: Date,
+  rd: ReturnType<typeof resolve>,
+  locale: typeof DEFAULT_LOCALES = DEFAULT_LOCALES,
+) => {
   const zone = getZone(date);
 
   return {
@@ -85,16 +91,20 @@ export const getFormats = (date: Date, rd: ReturnType<typeof resolve>, locale: t
 
 const repeat = (value: string, times: number) => {
   return Array(times + 1).join(value);
-}
+};
 
 export const padStart = (value: string, length: number, pad: string) => {
   if (value.length >= length) return value;
   return `${repeat(pad, length - value.length)}${value}`;
-}
+};
 
 const get12Hour = (hour: number, pattern: 'h' | 'hh') => {
   if (hour === 0) return 12;
-  return padStart(String(hour < 13 ? hour : hour - 12), pattern === 'hh' ? 2 : 1, '0');
+  return padStart(
+    String(hour < 13 ? hour : hour - 12),
+    pattern === 'hh' ? 2 : 1,
+    '0',
+  );
 };
 
 export const getZone = (date: Date) => {
@@ -102,16 +112,20 @@ export const getZone = (date: Date) => {
   const minutes = Math.abs(negMinutes);
   const hourOffset = Math.floor(minutes / 60);
   const minuteOffset = minutes % 60;
-  return `${negMinutes <= 0 ? '+' : '-'}${padStart(String(hourOffset), 2, '0')}:${padStart(String(minuteOffset), 2, '0')}`;
+  return `${negMinutes <= 0 ? '+' : '-'}${padStart(
+    String(hourOffset),
+    2,
+    '0',
+  )}:${padStart(String(minuteOffset), 2, '0')}`;
 };
 
 export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
   const timestampsDiff = a.valueOf() - b.valueOf();
-  
+
   const fallback = () => {
     let restMilliseconds = timestampsDiff;
     const days = ~~(restMilliseconds / MILLISECONDS_A_DAY);
-    
+
     restMilliseconds -= days * MILLISECONDS_A_DAY;
     const hours = ~~(restMilliseconds / MILLISECONDS_A_HOUR);
 
@@ -123,7 +137,7 @@ export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
 
     restMilliseconds -= seconds * MILLISECONDS_A_SECOND;
     const milliseconds = restMilliseconds;
-    
+
     return {
       // year
       // month
@@ -153,11 +167,11 @@ export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
     default:
       return fallback();
   }
-}
+};
 
 export const diffMonth = (a: Moment, b: Moment) => {
   const months = (b.year() - a.year()) * 12 + (b.month() - a.month());
   const mayB = a.add(months, Units.month);
 
   return b.valueOf() - mayB.valueOf() < 0 ? -(months - 1) : -months;
-}
+};

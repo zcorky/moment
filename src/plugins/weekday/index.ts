@@ -19,30 +19,30 @@ export default () => ({
 
     proto.monday = function () {
       return this.startOf(Units.week).add(1, Units.day);
-    }
+    };
 
     proto.tuesday = function () {
       return this.startOf(Units.week).add(2, Units.day);
-    }
+    };
 
     proto.wednesday = function () {
       return this.startOf(Units.week).add(3, Units.day);
-    }
+    };
 
     proto.thursday = function () {
       return this.startOf(Units.week).add(4, Units.day);
-    }
+    };
 
     proto.friday = function () {
       return this.startOf(Units.week).add(5, Units.day);
-    }
+    };
 
     proto.saturday = function () {
       return this.startOf(Units.week).add(6, Units.day);
-    }
+    };
 
     proto.sunday = function () {
       return this.startOf(Units.week).add(7, Units.day);
-    }
+    };
   },
 });

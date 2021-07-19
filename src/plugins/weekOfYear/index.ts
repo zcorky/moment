@@ -15,6 +15,6 @@ export default () => ({
 
     proto.weekOfYear = function () {
       return Math.ceil(this.dayOfYear() / 7);
-    }
+    };
   },
 });
