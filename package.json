@@ -26,7 +26,7 @@
     "commit": "cz",
     "clean": "rimraf -rf lib",
     "coverage": "codecov",
-    "preinstall": "husky install"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
