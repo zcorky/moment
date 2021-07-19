@@ -24,11 +24,14 @@
     "clean": "rimraf -rf lib",
     "test": "jest -w 1",
     "fmt": "prettier --write src/**/{*.ts,*.tsx}",
+    "commit": "cz",
     "eslint": "eslint src/**/*.{ts,tsx} --fix",
-    "coverage": "jest -w 1 && codecov",
+    "coverage": "codecov",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@types/chai": "^4.1.7",
     "@types/jest": "^23.3.12",
     "@types/node": "^10.9.4",
@@ -36,7 +39,9 @@
     "@typescript-eslint/parser": "^4.28.3",
     "@zcorky/tsconfig": "^0.0.3",
     "codecov": "^3.1.0",
+    "commitizen": "^4.2.4",
     "cross-env": "^5.2.0",
+    "cz-conventional-changelog": "^3.3.0",
     "dayjs": "^1.7.8",
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -87,6 +92,11 @@
         "lines": 90,
         "statements": -10
       }
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   },
   "publishConfig": {
