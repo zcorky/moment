@@ -31,7 +31,7 @@ export const DEFAULT_FORMAT_PATTERN = 'YYYY-MM-DDTHH:mm:ssZ';
  *  support 20190101 00:00:00
  *  support 2019-01-03T06:26:57.873Z
  */
-export const REGEXP_PARSE = /^(\d{4})[-\/]?(\d{1,2})[-\/]?(\d{0,2})(.*?(\d{1,2}):(\d{1,2}):(\d{1,2}))?.?(\d{1,3})?Z?$/;
+export const REGEXP_PARSE = /^(\d{4})[-/]?(\d{1,2})[-/]?(\d{0,2})(.*?(\d{1,2}):(\d{1,2}):(\d{1,2}))?.?(\d{1,3})?Z?$/;
 
 export const REGEXP_FORMAT = /\[.*?\]|Y{4}|Y{2}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g;
 
@@ -44,7 +44,7 @@ export enum Units {
   second = 'second',
   milliSecond = 'millisecond',
   week = 'week',
- };
+ }
 
 export enum SetMethods {
   year = 'setFullYear',
@@ -55,7 +55,7 @@ export enum SetMethods {
   second = 'setSeconds',
   // @millisecond not milliSecond, just for semver
   millisecond = 'setMilliseconds',
-};
+}
 
 export const SECONDS_A_MINUTE = 60;
 export const SECONDS_A_HOUR = SECONDS_A_MINUTE * 60;

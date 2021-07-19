@@ -107,6 +107,34 @@ export const getZone = (date: Date) => {
 
 export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
   const timestampsDiff = a.valueOf() - b.valueOf();
+  
+  const fallback = () => {
+    let restMilliseconds = timestampsDiff;
+    const days = ~~(restMilliseconds / MILLISECONDS_A_DAY);
+    
+    restMilliseconds -= days * MILLISECONDS_A_DAY;
+    const hours = ~~(restMilliseconds / MILLISECONDS_A_HOUR);
+
+    restMilliseconds -= hours * MILLISECONDS_A_HOUR;
+    const minutes = ~~(restMilliseconds / MILLISECONDS_A_MINUTE);
+
+    restMilliseconds -= minutes * MILLISECONDS_A_MINUTE;
+    const seconds = ~~(restMilliseconds / MILLISECONDS_A_SECOND);
+
+    restMilliseconds -= seconds * MILLISECONDS_A_SECOND;
+    const milliseconds = restMilliseconds;
+    
+    return {
+      // year
+      // month
+      days,
+      hours,
+      minutes,
+      seconds,
+      milliseconds,
+    };
+  };
+
   switch (unit) {
     case Units.year:
       return ~~(diffMonth(a, b) / 12);
@@ -123,30 +151,7 @@ export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
     case Units.second:
       return timestampsDiff / MILLISECONDS_A_SECOND;
     default:
-      let restMilliseconds = timestampsDiff;
-      const days = ~~(restMilliseconds / MILLISECONDS_A_DAY);
-      
-      restMilliseconds -= days * MILLISECONDS_A_DAY;
-      const hours = ~~(restMilliseconds / MILLISECONDS_A_HOUR);
-
-      restMilliseconds -= hours * MILLISECONDS_A_HOUR;
-      const minutes = ~~(restMilliseconds / MILLISECONDS_A_MINUTE);
-
-      restMilliseconds -= minutes * MILLISECONDS_A_MINUTE;
-      const seconds = ~~(restMilliseconds / MILLISECONDS_A_SECOND);
-
-      restMilliseconds -= seconds * MILLISECONDS_A_SECOND;
-      const milliseconds = restMilliseconds;
-      
-      return {
-        // year
-        // month
-        days,
-        hours,
-        minutes,
-        seconds,
-        milliseconds,
-      };
+      return fallback();
   }
 }
 

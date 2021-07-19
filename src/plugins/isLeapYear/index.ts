@@ -1,6 +1,4 @@
 import { Moment } from '../../index';
-import { MILLISECONDS_A_DAY } from '../../constants';
-
 declare module '../../index' {
   export interface Moment {
     isLeapYear(): boolean;
