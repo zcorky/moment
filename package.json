@@ -30,6 +30,7 @@
     "@types/chai": "^4.1.7",
     "@types/jest": "^23.3.12",
     "@types/node": "^10.9.4",
+    "@zcorky/tsconfig": "^0.0.3",
     "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "dayjs": "^1.7.8",
@@ -42,7 +43,7 @@
     "tslint": "^5.10.0",
     "tslint-eslint-rules": "^5.3.1",
     "tslint-jsdoc-rules": "^0.1.2",
-    "typescript": "^3.2.2"
+    "typescript": "^4.3.5"
   },
   "files": [
     "lib/"
