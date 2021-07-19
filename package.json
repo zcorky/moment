@@ -21,24 +21,22 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && tsc",
-    "clean": "rimraf -rf lib",
     "test": "jest -w 1",
-    "fmt": "prettier --write src/**/{*.ts,*.tsx}",
+    "fmt": "eslint src/**/*.{ts,tsx} --fix && prettier --write src/**/{*.ts,*.tsx}",
     "commit": "cz",
-    "eslint": "eslint src/**/*.{ts,tsx} --fix",
+    "clean": "rimraf -rf lib",
     "coverage": "codecov",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@types/chai": "^4.1.7",
-    "@types/jest": "^23.3.12",
-    "@types/node": "^10.9.4",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.3",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "@zcorky/tsconfig": "^0.0.3",
-    "codecov": "^3.1.0",
+    "codecov": "^3.8.2",
     "commitizen": "^4.2.4",
     "cross-env": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -46,12 +44,12 @@
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
     "husky": "^1.2.1",
-    "jest": "^23.6.0",
-    "moment": "^2.23.0",
+    "jest": "^27.0.6",
+    "moment": "^2.29.1",
     "prettier": "^2.3.2",
     "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.5",
-    "ts-node": "^7.0.1",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
   "files": [
@@ -103,6 +101,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@zcorky/is": "^1.0.6"
+    "@zcorky/is": "^1.0.7"
   }
 }
