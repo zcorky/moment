@@ -170,8 +170,10 @@ export const getDiff = (a: Moment, b: Moment, unit?: Unit) => {
 };
 
 export const diffMonth = (a: Moment, b: Moment) => {
-  const months = (b.year() - a.year()) * 12 + (b.month() - a.month());
-  const mayB = a.add(months, Units.month);
+  if (a.toDate() < b.toDate()) return -diffMonth(b, a);
 
-  return b.valueOf() - mayB.valueOf() < 0 ? -(months - 1) : -months;
+  const months = (a.year() - b.year()) * 12 + (a.month() - b.month());
+  const calcA = b.clone().add(months, Units.month);
+
+  return a.valueOf() - calcA.valueOf() < 0 ? months - 1 : months;
 };
